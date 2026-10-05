@@ -12,3 +12,4 @@ p, li { color: var(--fg); }
 hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
 footer { font-size: 14px; color: var(--muted); }
 code { background: var(--line); padding: 1px 5px; border-radius: 4px; }
+blockquote { margin: 12px 0; padding: 4px 16px; border-left: 3px solid var(--accent); color: var(--fg); }
