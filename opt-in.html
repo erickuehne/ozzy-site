@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opt in to Ozzy text messages</title>
+<meta name="description" content="How a household member opts in to automated text messages from Ozzy by Eric Kuehne.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<header><nav><a href="./">Home</a> <a href="opt-in.html">Opt in</a> <a href="privacy.html">Privacy Policy</a> <a href="terms.html">SMS Terms</a></nav></header>
+<h1>Opt in to Ozzy text messages</h1>
+<p class="muted">Ozzy by Eric Kuehne, an automated assistant application for one household.</p>
+
+<p>Ozzy is private to the operator's household: only family members can be enrolled, and there is no public sign-up. If you are a member of the household and want Ozzy to text you, fill in this form. Submitting it opens an email to Eric Kuehne, the operator, with your request; he adds your number to the application by hand and you then receive one confirmation text.</p>
+
+<form id="optin" action="mailto:erickuehne@gmail.com" method="get">
+  <label for="name">Your name</label>
+  <input id="name" name="name" type="text" autocomplete="name" required>
+
+  <label for="phone">Your mobile number</label>
+  <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(801) 555-0123" required>
+
+  <div class="consent">
+    <input id="consent" name="consent" type="checkbox" required>
+    <label for="consent">I agree to receive automated text messages from Ozzy by Eric Kuehne at this number: reminders I ask for, school updates, and occasional family messages. Message frequency varies, usually a few messages a day at most. Message and data rates may apply. Reply <code>STOP</code> to opt out at any time, <code>HELP</code> for help. Consent is not a condition of any purchase. Terms: <a href="terms.html">https://erickuehne.github.io/ozzy-site/terms.html</a> Privacy: <a href="privacy.html">https://erickuehne.github.io/ozzy-site/privacy.html</a></label>
+  </div>
+
+  <button type="submit">Send my request to Eric</button>
+  <p id="sent" class="muted" hidden>Your email app should have opened with the request. If it didn't, email <a href="mailto:erickuehne@gmail.com">erickuehne@gmail.com</a> with your name and mobile number and say that you agree to receive Ozzy's texts.</p>
+</form>
+
+<h2>What happens next</h2>
+<ul>
+<li>Eric adds your number to Ozzy and records your name, number and the date you consented.</li>
+<li>You get one confirmation text: "Ozzy by Eric Kuehne: You're enrolled for automated reminders and school updates. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help."</li>
+<li>Reply <code>STOP</code> to any message to stop the texts, or <code>HELP</code> for help. You can also just tell Eric.</li>
+</ul>
+
+<h2>Opting in in person</h2>
+<p>A household member can also opt in verbally. The operator reads the consent script published in the <a href="terms.html#opting-in">SMS Terms</a> and adds the number only after the person agrees.</p>
+
+<hr>
+<footer><a href="./">Home</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">SMS Terms and Conditions</a></footer>
+</main>
+<script>
+// No server behind this page: the request goes to the operator by email, pre-filled from the form.
+document.getElementById('optin').addEventListener('submit', function (ev) {
+  ev.preventDefault();
+  var name = document.getElementById('name').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  if (!name || !phone || !document.getElementById('consent').checked) return;
+  var body = 'Please add me to Ozzy.\n\nName: ' + name + '\nMobile number: ' + phone +
+    '\n\nI agree to receive automated text messages from Ozzy by Eric Kuehne at this number. ' +
+    'Message frequency varies. Message and data rates may apply. I can reply STOP to opt out at any time.' +
+    '\n\nConsented on ' + new Date().toString();
+  window.location.href = 'mailto:erickuehne@gmail.com?subject=' + encodeURIComponent('Please add me to Ozzy') + '&body=' + encodeURIComponent(body);
+  document.getElementById('sent').hidden = false;
+});
+</script>
+</body>
+</html>
